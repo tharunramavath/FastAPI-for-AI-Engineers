@@ -475,12 +475,19 @@ python -m pytest tests -q
 **🎓 Learn — the key mental model:**
 
 ```
-Request → Middleware → Router → Dependency → Service → Response
-           (logging)    (path,    (auth)      (model
-                        params)               inference)
+[ lifespan: startup → load models  |  shutdown → clean up ]
+
+Request → Middleware → Router → Dependency → Pydantic body → Handler → Service
+ (HTTP)   (logging,    (URL    (auth,        (validated      (async)   (model
+          CORS)        match,   rate limit)   422 on bad                inference)
+                     path/query              input)
+                │
+                ├─ any error → global exception handlers → JSON 4xx/5xx
+                └─ Result → Pydantic response model → Response
+                                                    └→ Background tasks (billing/logging)
 ```
 
-Every production AI inference API (OpenAI, Anthropic, Hugging Face) is this exact pipeline with a few more dependencies (rate limiting, DB sessions, vector stores) bolted on.
+Every production AI inference API (OpenAI, Anthropic, Hugging Face) is this exact pipeline, with a few more dependencies (rate limiting, DB sessions, vector stores) and Pydantic validation bolted on at the edges.
 
 ### 💪 Challenges (do at least 2)
 

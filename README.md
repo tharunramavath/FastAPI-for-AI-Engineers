@@ -197,9 +197,16 @@ curl http://localhost:8000/models -H "X-API-Key: test-key-123"
 ## 🧱 The Mental Model
 
 ```
-Request → Middleware → Router → Dependency → Service → Response
-            (logging,     (path    (auth,         (model      (Pydantic
-             CORS)          params)  rate‑limit)   inference)   serialization)
+[ lifespan: startup → load models  |  shutdown → clean up ]
+
+Request → Middleware → Router → Dependency → Pydantic body → Handler → Service
+ (HTTP)   (logging,    (URL    (auth,       (validated      (async)   (model
+          CORS)        match,   rate limit)  422 on bad                 inference)
+                     path/query              input)
+                │
+                ├─ any error → global exception handlers → JSON 4xx/5xx
+                └─ Result → Pydantic response model → Response
+                                                    └→ Background tasks (billing/logging)
 ```
 
 Every production AI/ML API follows this exact pipeline. Learn it here, recognise it everywhere.

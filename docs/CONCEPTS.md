@@ -421,9 +421,18 @@ async def rag_query(body: QueryRequest, db=Depends(get_vector_db)):
 ## 7. Mental Model — Putting It All Together
 
 ```
-Request → Middleware → Router → Dependency → Service → Response
-          (logging,     (URL      (auth,       (model    (Pydantic
-           CORS)         match)    rate limit)  inference) model)
+[ lifespan: startup → load models  |  shutdown → clean up ]
+
+Request → Middleware → Router → Dependency → Pydantic body → Handler → Service
+ (HTTP)   (logging,    (URL    (auth,        (validated      (async)   (model
+          CORS)        match,   rate limit)   422 on bad                inference)
+                     path/query              input)
+                │
+                ├─ any error → global exception handlers → JSON 4xx/5xx
+                └─ Result → Pydantic response model → Response
+                                                    └→ Background tasks (billing/logging)
 ```
+
+Pydantic touches **both ends** of the Service (validating the body in, serializing the result out). The lifespan is the **envelope** around the whole process, not a per-request step, and exception handlers form the parallel **failure path**. See the full request lifecycle in §2.
 
 Every production AI inference API — OpenAI, Anthropic, Hugging Face — is this exact pipeline, with more dependencies bolted on (DB sessions, vector stores, telemetry). Master this project's flow and you've learned the template for all of them.

@@ -134,10 +134,13 @@
         <div class="pl-node">Middleware</div><span class="pl-arr">→</span>
         <div class="pl-node">Router</div><span class="pl-arr">→</span>
         <div class="pl-node">Dependency</div><span class="pl-arr">→</span>
+        <div class="pl-node">Pydantic Body</div><span class="pl-arr">→</span>
+        <div class="pl-node">Handler</div><span class="pl-arr">→</span>
         <div class="pl-node">Service</div><span class="pl-arr">→</span>
+        <div class="pl-node">Pydantic Model</div><span class="pl-arr">→</span>
         <div class="pl-node pl-node-last">Response</div>
       </div>
-      <p class="pipeline-note">Every AI inference API in production — OpenAI, Anthropic, Hugging Face — follows this exact flow.</p>
+      <p class="pipeline-note">Pydantic validates at both ends of the Service; lifespan event wraps it all; exception handlers cover the failure path. Every AI inference API in production — OpenAI, Anthropic, Hugging Face — follows this exact flow.</p>
 
       <h2 class="sec-title">Quick start</h2>
       <pre class="code"><code data-copy>python -m venv .venv
