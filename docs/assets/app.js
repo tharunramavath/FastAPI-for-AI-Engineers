@@ -61,7 +61,74 @@
     });
 
     searchEl.addEventListener("input", filterToc);
+
+    initSidebar();
   });
+
+  /* ── Sidebar collapse + drag-resize (desktop) ────────────────── */
+  function initSidebar() {
+    var collapseBtn = $("#collapse");
+    var resizeEl = $("#resize");
+    var savedWidth = parseInt(localStorage.getItem("sbWidth") || "300", 10);
+
+    function setWidth(w) {
+      sidebar.classList.remove("collapsed");
+      sidebar.style.width = w + "px";
+    }
+
+    // Collapse / expand toggle
+    collapseBtn.addEventListener("click", function () {
+      var isCollapsed = sidebar.classList.toggle("collapsed");
+      if (isCollapsed) {
+        sidebar.style.width = "70px";
+        collapseBtn.setAttribute("aria-expanded", "false");
+        collapseBtn.title = "Expand sidebar";
+        localStorage.setItem("sbCollapsed", "1");
+      } else {
+        setWidth(savedWidth);
+        collapseBtn.setAttribute("aria-expanded", "true");
+        collapseBtn.title = "Collapse sidebar";
+        localStorage.setItem("sbCollapsed", "0");
+      }
+    });
+
+    // Drag to resize
+    resizeEl.addEventListener("pointerdown", function (e) {
+      e.preventDefault();
+      var startX = e.clientX;
+      var startW = sidebar.offsetWidth;
+      sidebar.classList.add("dragging");
+      document.body.style.userSelect = "none";
+
+      function move(ev) {
+        var w = Math.min(Math.max(startW + (ev.clientX - startX), 240), 460);
+        sidebar.style.width = w + "px";
+        sidebar.classList.remove("collapsed");
+      }
+      function up() {
+        document.removeEventListener("pointermove", move);
+        document.removeEventListener("pointerup", up);
+        sidebar.classList.remove("dragging");
+        document.body.style.userSelect = "";
+        savedWidth = Math.min(Math.max(sidebar.offsetWidth, 240), 460);
+        localStorage.setItem("sbWidth", savedWidth);
+        localStorage.setItem("sbCollapsed", "0");
+        collapseBtn.setAttribute("aria-expanded", "true");
+      }
+      document.addEventListener("pointermove", move);
+      document.addEventListener("pointerup", up);
+    });
+
+    // Restore persisted state
+    if (localStorage.getItem("sbCollapsed") === "1") {
+      sidebar.classList.add("collapsed");
+      sidebar.style.width = "70px";
+      collapseBtn.setAttribute("aria-expanded", "false");
+      collapseBtn.title = "Expand sidebar";
+    } else {
+      setWidth(savedWidth);
+    }
+  }
 
   function closeSidebar() {
     sidebar.classList.remove("open");

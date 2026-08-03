@@ -35,6 +35,7 @@
 
   <!-- ─────────────────────────── SIDEBAR ─────────────────────────── -->
   <aside id="sidebar" class="sidebar">
+    <div id="resize" class="resize" title="Drag to resize"></div>
     <div class="brand">
       <div class="brand-mark">⚡</div>
       <div>
@@ -82,6 +83,10 @@
       <span class="dot">·</span>
       <a href="https://fastapi.tiangolo.com" target="_blank" rel="noopener">FastAPI docs</a>
     </div>
+
+    <button id="collapse" class="collapse-btn" title="Collapse sidebar" aria-expanded="true">
+      <span class="cb-ico">⏴</span><span class="cb-txt">Collapse</span>
+    </button>
   </aside>
 
   <div id="backdrop" class="backdrop"></div>
