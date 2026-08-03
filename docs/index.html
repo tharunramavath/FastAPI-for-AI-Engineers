@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FastAPI for AI Engineers — Hands-On Guide</title>
+<meta name="description" content="A production-style AI model serving API built from scratch with FastAPI. Hands-on learning path, concepts, diagrams, and challenges." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/night-owl.min.css" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<!-- Reading progress bar (top, in theme red) -->
+<div id="progress" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="topbar-title">
+      <span class="crumb">FastAPI ·</span>
+      <span id="page-crumb">Home</span>
+    </div>
+    <a class="topbar-link" href="https://github.com/tharunramavath/FastAPI-for-AI-Engineers" target="_blank" rel="noopener">
+      ⭐ GitHub
+    </a>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- ─────────────────────────── SIDEBAR ─────────────────────────── -->
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">⚡</div>
+      <div>
+        <div class="brand-name">FastAPI for AI Engineers</div>
+        <div class="brand-sub">One project · everything you need</div>
+      </div>
+    </div>
+
+    <nav class="nav-search-wrap" aria-label="Search">
+      <input id="search" type="search" placeholder="Jump to a topic… ( / )" autocomplete="off" />
+    </nav>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <button class="nav-item" data-page="home">
+        <span class="ni-ico">🏠</span><span>Home</span>
+      </button>
+
+      <div class="nav-group">
+        <button class="nav-item nav-parent" data-page="learning">
+          <span class="ni-ico">🧭</span><span>Learning Path</span>
+          <span class="chev"></span>
+        </button>
+        <ul id="toc-learning" class="toc" role="list"></ul>
+      </div>
+
+      <div class="nav-group">
+        <button class="nav-item nav-parent" data-page="concepts">
+          <span class="ni-ico">📘</span><span>Core Concepts</span>
+          <span class="chev"></span>
+        </button>
+        <ul id="toc-concepts" class="toc" role="list"></ul>
+      </div>
+
+      <div class="nav-group">
+        <button class="nav-item nav-parent" data-page="map">
+          <span class="ni-ico">🗺️</span><span>Project Map</span>
+          <span class="chev"></span>
+        </button>
+        <ul id="toc-map" class="toc" role="list"></ul>
+      </div>
+    </nav>
+
+    <div class="sidebar-foot">
+      <a href="https://github.com/tharunramavath/FastAPI-for-AI-Engineers/blob/main/docs/LEARNING_PATH.md" target="_blank" rel="noopener">Download .md</a>
+      <span class="dot">·</span>
+      <a href="https://fastapi.tiangolo.com" target="_blank" rel="noopener">FastAPI docs</a>
+    </div>
+  </aside>
+
+  <div id="backdrop" class="backdrop"></div>
+
+  <!-- ─────────────────────────── CONTENT ─────────────────────────── -->
+  <main id="content" class="content">
+
+    <!-- HOME (static) -->
+    <section id="page-home" class="page">
+      <div class="hero">
+        <span class="hero-kicker">Beginner → Production. Zero GPU required.</span>
+        <h1>Learn <span class="hl">FastAPI</span> the way AI engineers actually build with it.</h1>
+        <p class="hero-sub">
+          Build a production-style <strong>AI Model Serving API</strong> — synchronous inference, token streaming, auth,
+          rate limits, error handling, file uploads — all in one project. Every pattern is annotated and explained.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-red" href="#page=learning">Start the Learning Path →</a>
+          <a class="btn btn-ghost" href="#page=concepts">Read the Concepts</a>
+          <button class="btn btn-outline" id="copy-quickstart">Copy Quick Start</button>
+        </div>
+      </div>
+
+      <h2 class="sec-title">What you&#8217;ll build</h2>
+      <div class="card-grid">
+        <div class="card"><span class="card-ico">🧠</span><h3>Sync Inference</h3><p><code>POST /predict</code> runs text through a model with structured input &amp; output validation.</p></div>
+        <div class="card"><span class="card-ico">💬</span><h3>Token Streaming</h3><p><code>POST /stream</code> streams tokens over Server-Sent Events, exactly like ChatGPT.</p></div>
+        <div class="card"><span class="card-ico">🔐</span><h3>Auth &amp; Logging</h3><p>API-key auth via dependency injection + request logging with traceable <code>X-Request-ID</code>.</p></div>
+        <div class="card"><span class="card-ico">🖼️</span><h3>File Uploads</h3><p><code>POST /vision/analyze</code> — multipart image uploads with server-side validation.</p></div>
+        <div class="card"><span class="card-ico">🧰</span><h3>Service Layer</h3><p>Mocked async model service you can swap for OpenAI / a local GPU model in 20 lines.</p></div>
+        <div class="card"><span class="card-ico">🧪</span><h3>Testing</h3><p>13 passing tests pin down every behavior — your executable documentation.</p></div>
+      </div>
+
+      <h2 class="sec-title">The mental model</h2>
+      <div class="pipeline" aria-label="Request pipeline diagram">
+        <div class="pl-node">Request</div><span class="pl-arr">→</span>
+        <div class="pl-node">Middleware</div><span class="pl-arr">→</span>
+        <div class="pl-node">Router</div><span class="pl-arr">→</span>
+        <div class="pl-node">Dependency</div><span class="pl-arr">→</span>
+        <div class="pl-node">Service</div><span class="pl-arr">→</span>
+        <div class="pl-node pl-node-last">Response</div>
+      </div>
+      <p class="pipeline-note">Every AI inference API in production — OpenAI, Anthropic, Hugging Face — follows this exact flow.</p>
+
+      <h2 class="sec-title">Quick start</h2>
+      <pre class="code"><code data-copy>python -m venv .venv
+source .venv/bin/activate            # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env
+uvicorn app.main:app --reload
+# → open http://localhost:8000/docs</code></pre>
+
+      <h2 class="sec-title">Starting point</h2>
+      <p class="lead">Not sure where to begin? Follow the <a href="#page=learning" data-page-link="learning">13-step Learning Path</a> — each step tells you the file to read, the command to run, what to observe, and what to learn. Or jump straight into the <a href="#page=concepts" data-page-link="concepts">Core Concepts</a>.</p>
+    </section>
+
+    <!-- Learning Path (rendered) -->
+    <section id="page-learning" class="page" hidden>
+      <div class="doc-head">
+        <span class="doc-kicker">Hands-On Guide</span>
+        <h1 id="learning-title">Learning Path</h1>
+      </div>
+      <div id="learning-body" class="prose"></div>
+    </section>
+
+    <!-- Concepts (rendered) -->
+    <section id="page-concepts" class="page" hidden>
+      <div class="doc-head">
+        <span class="doc-kicker">Reference</span>
+        <h1 id="concepts-title">Core Concepts</h1>
+      </div>
+      <div id="concepts-body" class="prose"></div>
+    </section>
+
+    <!-- Project Map (rendered) -->
+    <section id="page-map" class="page" hidden>
+      <div class="doc-head">
+        <span class="doc-kicker">Reference</span>
+        <h1 id="map-title">Project Map</h1>
+      </div>
+      <div id="map-body" class="prose"></div>
+    </section>
+
+    <footer class="footer">
+      <p>Built for learning · MIT style · <a href="https://github.com/tharunramavath/FastAPI-for-AI-Engineers" target="_blank" rel="noopener">Fork on GitHub</a></p>
+    </footer>
+  </main>
+</div>
+
+<button id="to-top" class="to-top" aria-label="Back to top">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

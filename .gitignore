@@ -1,0 +1,38 @@
+# ── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.whl
+
+# ── Virtual environments ─────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Environment / secrets ───────────────────────────────
+# .env holds real API keys — never commit it. Keep .env.example only.
+.env
+
+# ── Test / tool caches ───────────────────────────────────
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ── Editors / OS ─────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ── Local scratch ────────────────────────────────────────
+test.png
+test.txt
