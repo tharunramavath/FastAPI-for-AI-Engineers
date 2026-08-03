@@ -25,6 +25,8 @@
 | Every step tells you **what file to read, what command to run, and what to look for.** | Why each pattern exists and how production AI APIs use it. |
 | **[Start the path →](docs/LEARNING_PATH.md)** | **[Read the concepts →](docs/CONCEPTS.md)** |
 
+> 🎯 **Preparing for an AI engineering interview?** [Browse 38 interview questions with answers →](docs/INTERVIEW_QUESTIONS.md) — core concepts, async/streaming, auth, validation, testing, RAG, system design, production, and behavioral questions.
+
 > 🌐 **Prefer a guided browser experience?** [Open the live site →](https://tharunramavath.github.io/FastAPI-for-AI-Engineers/) — cream/red theme, sidebar navigation, scrollspy, search, and resizeable layout.
 
 ---

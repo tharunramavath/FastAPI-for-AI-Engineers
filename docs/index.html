@@ -76,6 +76,14 @@
         </button>
         <ul id="toc-map" class="toc" role="list"></ul>
       </div>
+
+      <div class="nav-group">
+        <button class="nav-item nav-parent" data-page="interview">
+          <span class="ni-ico">🎯</span><span>Interview Q&A</span>
+          <span class="chev"></span>
+        </button>
+        <ul id="toc-interview" class="toc" role="list"></ul>
+      </div>
     </nav>
 
     <div class="sidebar-foot">
@@ -168,6 +176,15 @@ uvicorn app.main:app --reload
         <h1 id="map-title">Project Map</h1>
       </div>
       <div id="map-body" class="prose"></div>
+    </section>
+
+    <!-- Interview Q&A (rendered) -->
+    <section id="page-interview" class="page" hidden>
+      <div class="doc-head">
+        <span class="doc-kicker">Career Prep</span>
+        <h1 id="interview-title">Interview Q&amp;A</h1>
+      </div>
+      <div id="interview-body" class="prose"></div>
     </section>
 
     <footer class="footer">

@@ -5,7 +5,8 @@
   var PAGES = {
     learning: { md: "LEARNING_PATH.md", title: "Learning Path", toc: "toc-learning", body: "learning-body" },
     concepts: { md: "CONCEPTS.md",        title: "Core Concepts", toc: "toc-concepts", body: "concepts-body" },
-    map:      { md: "MAP.md",             title: "Project Map",   toc: "toc-map",      body: "map-body" }
+    map:      { md: "MAP.md",             title: "Project Map",   toc: "toc-map",      body: "map-body" },
+    interview:{ md: "INTERVIEW_QUESTIONS.md", title: "Interview Q&A", toc: "toc-interview", body: "interview-body" }
   };
 
   var cache = {};
@@ -48,7 +49,7 @@
       });
     });
 
-    var m = (location.hash || "").match(/page=(home|learning|concepts|map)/);
+    var m = (location.hash || "").match(/page=(home|learning|concepts|map|interview)/);
     navigate(m ? m[1] : "home");
 
     window.addEventListener("scroll", onScroll, { passive: true });

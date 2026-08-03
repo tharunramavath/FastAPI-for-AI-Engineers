@@ -461,6 +461,8 @@ python -m pytest tests -v
 
 **📖 Read:** `docs/CONCEPTS.md` — read it *after* you've completed Steps 1–12. It re-explains everything you've seen from a higher level (when to use async, interview questions, real OpenAI/Anthropic patterns).
 
+Preparing for an interview? Browse **[`docs/INTERVIEW_QUESTIONS.md`](INTERVIEW_QUESTIONS.md)** — a large question bank with direct answers, code snippets, and detailed explanations covering every concept in this project.
+
 **▶️ Run:**
 
 ```bash
