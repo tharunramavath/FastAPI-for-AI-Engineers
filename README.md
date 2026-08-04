@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10+-blue" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT">
-  <a href="https://github.com/tharunramavath/FastAPI-for-AI-Engineers/actions/workflows/pages.yml"><img src="https://github.com/tharunramavath/FastAPI-for-AI-Engineers/actions/workflows/pages.yml/badge.svg" alt="Pages Deploy"></a>
+  <a href="https://github.com/tharunramavath/FastAPI-for-AI-Engineers-V2/actions/workflows/pages.yml"><img src="https://github.com/tharunramavath/FastAPI-for-AI-Engineers-V2/actions/workflows/pages.yml/badge.svg" alt="Pages Deploy"></a>
 </p>
 
 <h1 align="center">⚡ FastAPI for AI Engineers</h1>
